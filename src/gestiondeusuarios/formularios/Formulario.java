@@ -4,6 +4,7 @@
  */
 package gestiondeusuarios.formularios;
 
+import gestiondeusuarios.Usuarios;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
@@ -38,11 +39,17 @@ public class Formulario extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jlist_usuarios = new javax.swing.JList<>();
         btnEliminarUsuario = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jtf_apellidos_usuario = new javax.swing.JTextField();
+        jtf_direccion_usuario = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jtf_telefono_usuario = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gestión de Usuarios");
 
-        jLabel1.setText("Nombre de Usuario");
+        jLabel1.setText("Nombre");
 
         btnAgregarUsuario.setText("Agregar Usuario");
         btnAgregarUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -60,6 +67,12 @@ public class Formulario extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setText("Apellidos");
+
+        jLabel3.setText("Dirección");
+
+        jLabel4.setText("Teléfono");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -71,55 +84,94 @@ public class Formulario extends javax.swing.JFrame {
                         .addComponent(btnEliminarUsuario))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(33, 33, 33)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(180, 180, 180)
-                        .addComponent(btnAgregarUsuario))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jtf_nombre_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(37, 37, 37))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jtf_telefono_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jtf_nombre_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(jtf_apellidos_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addComponent(jtf_direccion_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(37, 37, 37))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnAgregarUsuario)
+                        .addGap(127, 127, 127))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(146, 146, 146)
+                        .addGap(27, 27, 27)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnEliminarUsuario))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(83, 83, 83)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(jtf_nombre_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(63, 63, 63)
-                        .addComponent(btnAgregarUsuario))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(btnEliminarUsuario)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jtf_apellidos_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(jtf_direccion_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(jtf_telefono_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(41, 41, 41)
+                        .addComponent(btnAgregarUsuario)))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    List<String> lista = new ArrayList<>();
+    List<Usuarios> lista = new ArrayList<>();
     
     private void btnAgregarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarUsuarioActionPerformed
         // TODO add your handling code here:
         //this.jlist_usuarios
-        String nombreUsuario = this.jtf_nombre_usuario.getText();
-        lista.add(nombreUsuario);
+        Usuarios usuario = new Usuarios();
+        
+        usuario.setNombre(this.jtf_nombre_usuario.getText());
+        usuario.setApellidos(this.jtf_apellidos_usuario.getText());
+        usuario.setDireccion(this.jtf_direccion_usuario.getText());
+        usuario.setTelefono(this.jtf_telefono_usuario.getText());
+        
+        //String nombre = usuario.getNombre();
+        //String apellidos = usuario.getApellidos();
+        //String direccion = usuario.getDireccion();
+        //String telefono = usuario.getTelefono();
+        
+        //String nombreUsuario = this.jtf_nombre_usuario.getText();
+        lista.add(usuario);
         updateListaUsuarios();
+        resetFormAgregarUsuarios();
     }//GEN-LAST:event_btnAgregarUsuarioActionPerformed
 
     private void btnEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarUsuarioActionPerformed
         // TODO add your handling code here:
-        String valueSelectedListaUsuarios = this.jlist_usuarios.getSelectedValue();
+        int indiceSelected = this.jlist_usuarios.getSelectedIndex();
         //System.out.println(valueSelectedListaUsuarios);
-        lista.remove(valueSelectedListaUsuarios);
+        lista.remove(indiceSelected);
         updateListaUsuarios();
     }//GEN-LAST:event_btnEliminarUsuarioActionPerformed
 
@@ -127,11 +179,18 @@ public class Formulario extends javax.swing.JFrame {
         DefaultListModel datos = new DefaultListModel();
         
         for(int i = 0; i < lista.size(); i++){
-            String nombre = lista.get(i);
-            datos.addElement(nombre);
+            String nombreCompleto = lista.get(i).nombreCompleto();
+            datos.addElement(nombreCompleto);
         }
         
         this.jlist_usuarios.setModel(datos);
+    }
+    
+    private void resetFormAgregarUsuarios(){
+        this.jtf_nombre_usuario.setText("");
+        this.jtf_apellidos_usuario.setText("");
+        this.jtf_direccion_usuario.setText("");
+        this.jtf_telefono_usuario.setText("");
     }
     
     /**
@@ -173,8 +232,14 @@ public class Formulario extends javax.swing.JFrame {
     private javax.swing.JButton btnAgregarUsuario;
     private javax.swing.JButton btnEliminarUsuario;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList<String> jlist_usuarios;
+    private javax.swing.JTextField jtf_apellidos_usuario;
+    private javax.swing.JTextField jtf_direccion_usuario;
     private javax.swing.JTextField jtf_nombre_usuario;
+    private javax.swing.JTextField jtf_telefono_usuario;
     // End of variables declaration//GEN-END:variables
 }
