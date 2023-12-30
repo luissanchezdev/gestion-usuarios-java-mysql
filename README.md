@@ -20,6 +20,18 @@ git clone https://github.com/luissanchezdev/gestion-usuarios-java-mysql.git
   
 2. Descarga la mysql connector mysql-connector-j-8.2.0 y agregalo a tus librerías
 
+3. Crear la base de datos ejecutado usando el script ubicado en la carpet "db"
+
+4. Actualizar los parárametros de conexión con la base de datos propia. Para esto en la clase UsuarioDao.java cambiar los valores:
+
+```bash
+String db = "NOMBRE DE LA BASE DE DATOS PROPIA";
+String user = "USUARIO DE BASE DE DATOS";
+String password = "CONTRASEÑA DE BASE DE DATOS";
+String host = "HOST - POR DEFECTO LOCALHOST";
+String port = "PUERTO - POR DEFECTO 3306";
+        
+```
 
 ## Estructura del proyecto
 
