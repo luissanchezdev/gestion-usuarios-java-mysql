@@ -1,0 +1,9 @@
+DROP TABLE IF EXISTS usuarios;
+
+CREATE TABLE usuarios (
+  id INTEGER PRIMARY KEY AUTO_INCREMENT,
+  nombre VARCHAR(50) NOT NULL,
+  apellidos VARCHAR(50) NOT NULL,  
+  direccion VARCHAR(150) NOT NULL,
+  telefono VARCHAR(50) NOT NULL
+)
