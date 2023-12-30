@@ -4,13 +4,13 @@
  */
 package gestiondeusuarios;
 
-import gestiondeusuarios.formularios.Formulario;
+import com.luissdev.gestiondeusuarios.formularios.Formulario;
 
 /**
  *
  * @author luissdev
  */
-public class GestionDeUsuarios {
+public class Main {
 
     /**
      * @param args the command line arguments

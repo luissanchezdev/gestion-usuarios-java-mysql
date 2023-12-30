@@ -2,11 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package gestiondeusuarios.formularios;
+package com.luissdev.gestiondeusuarios.formularios;
 
-import gestiondeusuarios.Usuarios;
+import com.luissdev.gestiondeusuarios.dao.UsuarioDao;
+import com.luissdev.gestiondeusuarios.models.Usuarios;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 
 /**
@@ -14,6 +18,8 @@ import javax.swing.DefaultListModel;
  * @author luissdev
  */
 public class Formulario extends javax.swing.JFrame {
+    
+    private List<Usuarios> lista = new ArrayList<>();
 
     /**
      * Creates new form Formulario
@@ -45,9 +51,20 @@ public class Formulario extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jtf_telefono_usuario = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        btn_editar = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        lb_id = new javax.swing.JLabel();
+        btn_limpiar = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gestión de Usuarios");
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         jLabel1.setText("Nombre");
 
@@ -73,6 +90,28 @@ public class Formulario extends javax.swing.JFrame {
 
         jLabel4.setText("Teléfono");
 
+        btn_editar.setText("Editar");
+        btn_editar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_editarActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("ID");
+
+        btn_limpiar.setText("Limpiar");
+        btn_limpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_limpiarActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        jLabel6.setText("LISTAR USUARIOS");
+
+        jLabel7.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        jLabel7.setText("EDITAR/ AGREGAR USUARIOS");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -81,6 +120,8 @@ public class Formulario extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_editar)
+                        .addGap(18, 18, 18)
                         .addComponent(btnEliminarUsuario))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(33, 33, 33)
@@ -94,33 +135,55 @@ public class Formulario extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jtf_telefono_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jtf_nombre_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(18, 18, 18)
                                 .addComponent(jtf_apellidos_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addGap(18, 18, 18)
-                                .addComponent(jtf_direccion_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jtf_direccion_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel5))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lb_id)
+                                    .addComponent(jtf_nombre_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(37, 37, 37))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btn_limpiar)
+                        .addGap(18, 18, 18)
                         .addComponent(btnAgregarUsuario)
-                        .addGap(127, 127, 127))))
+                        .addGap(64, 64, 64))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(171, 171, 171)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel7)
+                .addGap(105, 105, 105))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7))
+                        .addGap(4, 4, 4)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnEliminarUsuario))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnEliminarUsuario)
+                            .addComponent(btn_editar)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(83, 83, 83)
+                        .addGap(54, 54, 54)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(lb_id))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(jtf_nombre_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -136,47 +199,96 @@ public class Formulario extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(jtf_telefono_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(41, 41, 41)
-                        .addComponent(btnAgregarUsuario)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                        .addGap(37, 37, 37)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnAgregarUsuario)
+                            .addComponent(btn_limpiar))))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    List<Usuarios> lista = new ArrayList<>();
     
     private void btnAgregarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarUsuarioActionPerformed
-        // TODO add your handling code here:
-        //this.jlist_usuarios
+
         Usuarios usuario = new Usuarios();
+
+        UsuarioDao connectDB = new UsuarioDao();
+        try {
+            String contentFieldID = this.lb_id.getText();
+            System.out.println("Contenido del campo id: "+contentFieldID);
+            
+            if(contentFieldID != ""){
+                usuario.setId(this.lb_id.getText());
+                usuario.setNombre(this.jtf_nombre_usuario.getText());
+                usuario.setApellidos(this.jtf_apellidos_usuario.getText());
+                usuario.setDireccion(this.jtf_direccion_usuario.getText());
+                usuario.setTelefono(this.jtf_telefono_usuario.getText());
+                connectDB.editUsuario(usuario);
+            } else {
+                usuario.setNombre(this.jtf_nombre_usuario.getText());
+                usuario.setApellidos(this.jtf_apellidos_usuario.getText());
+                usuario.setDireccion(this.jtf_direccion_usuario.getText());
+                usuario.setTelefono(this.jtf_telefono_usuario.getText());
+                connectDB.agregarUsuario(usuario);
+            }
+            
+            updateListaUsuarios();
+            resetFormAgregarUsuarios();
+        } catch (SQLException ex) {
+            Logger.getLogger(Formulario.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
-        usuario.setNombre(this.jtf_nombre_usuario.getText());
-        usuario.setApellidos(this.jtf_apellidos_usuario.getText());
-        usuario.setDireccion(this.jtf_direccion_usuario.getText());
-        usuario.setTelefono(this.jtf_telefono_usuario.getText());
         
-        //String nombre = usuario.getNombre();
-        //String apellidos = usuario.getApellidos();
-        //String direccion = usuario.getDireccion();
-        //String telefono = usuario.getTelefono();
-        
-        //String nombreUsuario = this.jtf_nombre_usuario.getText();
-        lista.add(usuario);
-        updateListaUsuarios();
-        resetFormAgregarUsuarios();
     }//GEN-LAST:event_btnAgregarUsuarioActionPerformed
 
     private void btnEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarUsuarioActionPerformed
-        // TODO add your handling code here:
+
         int indiceSelected = this.jlist_usuarios.getSelectedIndex();
-        //System.out.println(valueSelectedListaUsuarios);
-        lista.remove(indiceSelected);
-        updateListaUsuarios();
+        Usuarios usuarioSelected =  lista.get(indiceSelected);
+        UsuarioDao controllador = new UsuarioDao();
+        try {
+            controllador.deleteUsuario(usuarioSelected.getId());
+            updateListaUsuarios();
+        } catch (SQLException ex) {
+            Logger.getLogger(Formulario.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnEliminarUsuarioActionPerformed
 
-    private void updateListaUsuarios(){
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        try {
+            // TODO add your handling code here:
+            updateListaUsuarios();
+        } catch (SQLException ex) {
+            Logger.getLogger(Formulario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_formComponentShown
+
+    private void btn_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editarActionPerformed
+        // TODO add your handling code here:
+        System.out.println("Click btn editar");
+        
+        int indiceSelected = this.jlist_usuarios.getSelectedIndex();
+        Usuarios usuarioSelected =  lista.get(indiceSelected);
+        // Setear campos
+        this.lb_id.setText(usuarioSelected.getId());
+        this.jtf_nombre_usuario.setText(usuarioSelected.getNombre());
+        this.jtf_apellidos_usuario.setText(usuarioSelected.getApellidos());
+        this.jtf_direccion_usuario.setText(usuarioSelected.getDireccion());
+        this.jtf_telefono_usuario.setText(usuarioSelected.getTelefono());  
+    }//GEN-LAST:event_btn_editarActionPerformed
+
+    private void btn_limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limpiarActionPerformed
+        // TODO add your handling code here:
+        resetFormAgregarUsuarios();
+    }//GEN-LAST:event_btn_limpiarActionPerformed
+
+    private void updateListaUsuarios() throws SQLException{
         DefaultListModel datos = new DefaultListModel();
+        
+        UsuarioDao usuarioDao = new UsuarioDao();
+        lista = usuarioDao.listarUsuarios();       
         
         for(int i = 0; i < lista.size(); i++){
             String nombreCompleto = lista.get(i).nombreCompleto();
@@ -187,6 +299,7 @@ public class Formulario extends javax.swing.JFrame {
     }
     
     private void resetFormAgregarUsuarios(){
+        this.lb_id.setText("");
         this.jtf_nombre_usuario.setText("");
         this.jtf_apellidos_usuario.setText("");
         this.jtf_direccion_usuario.setText("");
@@ -231,15 +344,21 @@ public class Formulario extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarUsuario;
     private javax.swing.JButton btnEliminarUsuario;
+    private javax.swing.JButton btn_editar;
+    private javax.swing.JButton btn_limpiar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList<String> jlist_usuarios;
     private javax.swing.JTextField jtf_apellidos_usuario;
     private javax.swing.JTextField jtf_direccion_usuario;
     private javax.swing.JTextField jtf_nombre_usuario;
     private javax.swing.JTextField jtf_telefono_usuario;
+    private javax.swing.JLabel lb_id;
     // End of variables declaration//GEN-END:variables
 }
