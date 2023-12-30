@@ -1,7 +1,7 @@
 
 ![Grabación-de-pantalla-2023-12-30-a-la_s_-1 00 32-a](https://github.com/luissanchezdev/gestion-usuarios-java-mysql/assets/50006980/40f68dd1-03c3-4054-9901-1078f205440e)
 
-# Gestión de Usuario con JAVA y MySQL
+# Gestión de Usuarios con JAVA y MySQL
 
 Gestionar una base de datos de usuarios, incorporando funciones, como crear, actualizar y eliminar usuarios.
 
@@ -50,4 +50,4 @@ Si deseas contribuir al proyecto, sigue estos pasos:
 
 Este proyecto está bajo la [Licencia Pública General de GNU (GPL)](https://www.gnu.org/licenses/gpl-3.0.html).
 
-Ver el archivo [LICENSE](LICENSE) para más detalles.
+Ver el archivo LICENSE para más detalles.
