@@ -68,6 +68,8 @@ public class Formulario extends javax.swing.JFrame {
 
         jLabel1.setText("Nombre");
 
+        btnAgregarUsuario.setBackground(new java.awt.Color(51, 102, 0));
+        btnAgregarUsuario.setForeground(new java.awt.Color(255, 255, 255));
         btnAgregarUsuario.setText("Agregar Usuario");
         btnAgregarUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -77,6 +79,8 @@ public class Formulario extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(jlist_usuarios);
 
+        btnEliminarUsuario.setBackground(new java.awt.Color(255, 51, 51));
+        btnEliminarUsuario.setForeground(new java.awt.Color(255, 255, 255));
         btnEliminarUsuario.setText("Eliminar Usuario");
         btnEliminarUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,6 +94,8 @@ public class Formulario extends javax.swing.JFrame {
 
         jLabel4.setText("Teléfono");
 
+        btn_editar.setBackground(new java.awt.Color(0, 102, 204));
+        btn_editar.setForeground(new java.awt.Color(255, 255, 255));
         btn_editar.setText("Editar");
         btn_editar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
